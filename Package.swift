@@ -11,19 +11,20 @@ let package = Package(
     products: [
         .library(
             name: "FlowWalletKit",
-            targets: ["FlowWalletKit"]
+            targets: ["FlowWalletKit", "WalletCore", "SwiftProtobuf2"]
         ),
     ],
     dependencies: [
-        .package(name: "Flow", url: "https://github.com/zed-io/flow-swift.git", from: "0.0.3-beta"),
-        .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMajor(from: "1.4.1")),
-        .package(name: "secp256k1", url: "https://github.com/GigaBitcoin/secp256k1.swift.git", from: "0.3.0"),
+        .package(name: "Flow", url: "https://github.com/outblock/flow-swift.git", from: "0.1.3-beta"),
+//        .package(name: "WalletCore", url: "https://github.com/Outblock/wallet-core", .revision("8ca0f092a7f39dc7cbeabd1013ec5d413449eec8")),
     ],
     targets: [
         .target(
             name: "FlowWalletKit",
-            dependencies: ["Flow", "CryptoSwift", "secp256k1"]
+            dependencies: ["Flow"]
         ),
+        .binaryTarget(name: "WalletCore", path: "Library/WalletCore.xcframework"),
+        .binaryTarget(name: "SwiftProtobuf2", path: "Library/SwiftProtobuf.xcframework"),
         .testTarget(
             name: "FlowWalletKitTests",
             dependencies: ["FlowWalletKit"],

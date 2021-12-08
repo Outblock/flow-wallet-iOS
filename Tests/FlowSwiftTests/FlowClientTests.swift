@@ -1,28 +1,26 @@
-// import Flow
-// @testable import FlowSwift
-// import XCTest
-//
-// final class FlowClientTests: XCTestCase {
-//    let client = FlowClient()
-//
-//    func testFlowClientConnection() {
-//        let expectation = XCTestExpectation(description: "test Flow Client connection.")
-//
-//        client.ping { response in
-//            XCTAssertNil(response.error, "Client connection error: \(String(describing: response.error?.localizedDescription)).")
-//            expectation.fulfill()
-//        }
-//
-//        wait(for: [expectation], timeout: 5)
-//    }
-//
-//    func testRetrieveCollectionById() {
-//        let expectation = XCTestExpectation(description: "retrieve the latest block")
-//
-//        client.getLatestBlock(isSealed: true) { latestBlockResponse in
-//            XCTAssertNil(latestBlockResponse.error, "getLatestBlock error: \(String(describing: latestBlockResponse.error?.localizedDescription)).")
-//            // let latestBlock = latestBlockResponse.result as! FlowBlock
-//        }
-//        wait(for: [expectation], timeout: 5)
-//    }
-// }
+import Flow
+@testable import FlowWalletKit
+import XCTest
+import WalletCore
+import CryptoKit
+
+final class FlowClientTests: XCTestCase {
+
+    let mnemonic = "normal dune pole key case cradle unfold require tornado mercy hospital buyer"
+    let derivationPath = "m/44'/539'/0'/0/0"
+    
+    func testHDWallet() {
+        let wallet = HDWallet(mnemonic: mnemonic, passphrase: "")!
+        XCTAssertTrue(Mnemonic.isValid(mnemonic: wallet.mnemonic))
+    }
+
+    func testP256Key() {
+        let wallet = HDWallet(mnemonic: mnemonic, passphrase: "")!
+        let privateKey = wallet.getCurveKey(curve: .nist256p1, derivationPath: derivationPath)
+        
+        XCTAssertEqual("638dc9ad0eee91d09249f0fd7c5323a11600e20d5b9105b66b782a96236e74cf", privateKey.data.hexValue)
+        
+        let unsignData = "hello schnorr".data(using: .utf8)!
+    }
+    
+ }

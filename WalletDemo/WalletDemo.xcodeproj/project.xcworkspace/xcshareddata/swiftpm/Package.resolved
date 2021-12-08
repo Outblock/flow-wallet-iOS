@@ -12,11 +12,11 @@
       },
       {
         "package": "Flow",
-        "repositoryURL": "https://github.com/outblock/flow-swift.git",
+        "repositoryURL": "https://github.com/outblock/flow-swift",
         "state": {
-          "branch": null,
-          "revision": "42fe3796dca322bb08a108447ebfc238d3e519a3",
-          "version": "0.1.3-beta"
+          "branch": "main",
+          "revision": "27ea8a1c3426ed83f608935e6c010e268ce1fdf7",
+          "version": null
         }
       },
       {
